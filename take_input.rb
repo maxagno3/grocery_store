@@ -14,14 +14,14 @@ class Cart
     else
       user_input.each { |order| @order[order] += 1 }
       
-      puts "Order for the following has been confirmed. Thank you.\n"
+      puts "Order for the following has been confirmed. Thank you.\n\n"
 
-      
+      view_order
     end
   end
 
   def view_order
-    print @order
+    puts @order
   end
 end
 
