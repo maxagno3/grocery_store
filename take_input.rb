@@ -16,11 +16,42 @@ class Cart
       puts "Invalid order! Try again."
       take_input
     else
-      user_input.each { |order| @order[order] += 1 }
+      user_input.each { |order| add_item(order) }
 
       puts "Order for the following has been confirmed. Thank you.\n\n"
 
       return view_order
+    end
+  end
+
+  def add_item(item)
+    case item
+    when "milk"
+      if @order["milk"].nil?
+        @order["milk"] = 1
+      else
+        @order["milk"] += 1
+      end
+    when "bread"
+      if @order["bread"].nil?
+        @order["bread"] = 1
+      else
+        @order["bread"] += 1
+      end
+    when "banana"
+      if @order["banana"].nil?
+        @order["banana"] = 1
+      else
+        @order["banana"] += 1
+      end
+    when "apple"
+      if @order["apple"].nil?
+        @order["apple"] = 1
+      else
+        @order["apple"] += 1
+      end
+    else
+      puts "#{item} is currently unavailable. We will make it available soon."
     end
   end
 
