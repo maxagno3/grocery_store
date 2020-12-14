@@ -24,23 +24,18 @@ class Bill
       if quantity > 1
         left_quantity = quantity % 2
         final_price = (@products[item]["sale_quantity"] * @products[item]["sale_price"]) + (left_quantity * @products[item]["unit_price"])
-        puts "#{final_price} is final milk"
       else
         final_price = quantity * @products[item]["unit_price"]
-        puts "#{final_price} is final milk else"
       end
     when "bread"
       if quantity > 1
         left_quantity = quantity % 3
         final_price = (@products[item]["sale_quantity"] * @products[item]["sale_price"]) + (left_quantity * @products[item]["unit_price"])
-        puts "#{final_price} is final bread"
       else
         final_price = quantity * @products[item]["unit_price"]
-        puts "#{final_price} is final bread else"
       end
     else
       final_price = quantity * @products[item]["unit_price"]
-      puts "#{final_price} is final else"
     end
   end
 end
