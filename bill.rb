@@ -11,44 +11,36 @@ class Bill
 
   def calculate_bill
     puts "Calculating the bill. Please wait..."
-
     total = 0
-    @products.keys.map do |order_key|
-      @order.keys.inject(0) do |sum, order|
-        if order_key == order
-          calculate_discount(order)
-        end
-      end
+    @order.each do |key, value|
+      calculate_discount(key, value)
     end
     puts total.round(2)
   end
 
-  def calculate_discount(item)
-    discount = 0
-    total = 0
+  def calculate_discount(item, quantity)
     case item
     when "milk"
-      if @order[item].odd? && @order[item] > 2
-        discount += (@products[item]["sale_price"] * 2) + @products[item]["unit_price"]
-        puts "#{discount} is the discount but even odd"
-      elsif @order[item].even? && @order[item] > 2
-        discount += (@products[item]["sale_price"] * @order[item])
-        puts "#{discount} is the discount"
+      if quantity > 1
+        left_quantity = quantity % 2
+        final_price = (@products[item]["sale_quantity"] * @products[item]["sale_price"]) + (left_quantity * @products[item]["unit_price"])
+        puts "#{final_price} is final milk"
       else
-        total += (@products[item]["unit_price"] * @order[item])
-        puts "#{total} is the total amount of milk"
+        final_price = quantity * @products[item]["unit_price"]
+        puts "#{final_price} is final milk else"
       end
     when "bread"
-      if @order[item].odd? && @order[item] > 2
-        discount += (@products[item]["sale_price"] * 2) + @products[item]["unit_price"]
-        puts "#{discount} is the odd discount"
+      if quantity > 1
+        left_quantity = quantity % 3
+        final_price = (@products[item]["sale_quantity"] * @products[item]["sale_price"]) + (left_quantity * @products[item]["unit_price"])
+        puts "#{final_price} is final bread"
       else
-        total += (@products[item]["unit_price"] * @order[item])
-        puts "#{total} is the total amount of bread"
+        final_price = quantity * @products[item]["unit_price"]
+        puts "#{final_price} is final bread else"
       end
     else
-      total += (@products[item]["unit_price"] * @order[item])
-      puts "#{total} is the total amount"
+      final_price = quantity * @products[item]["unit_price"]
+      puts "#{final_price} is final else"
     end
   end
 end
