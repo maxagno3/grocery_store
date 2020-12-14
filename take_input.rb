@@ -63,4 +63,4 @@ end
 cart_items = Cart.new
 cart_items.take_input
 bill = Bill.new(cart_items.order)
-bill.show_bill
+bill.calculate_bill
