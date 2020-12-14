@@ -7,6 +7,17 @@ class Bill
   end
 
   def show_bill
+    total_price = 0
+    saved = 0
+    puts "Items\t Quantity\t Price"
+    puts "______________________________"
+    @order.each do |item, quantity|
+      puts "#{item.capitalize}\t  #{quantity}\t \t#{calculate_discount(item, quantity)}"
+      total_price += calculate_discount(item, quantity)
+      saved += (@products[item]["unit_price"] * quantity) - calculate_discount(item, quantity)
+    end
+    puts "Total Price: #{total_price.round(2)}"
+    puts "You saved #{saved.round(2)} today"
   end
 
   def calculate_bill
