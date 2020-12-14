@@ -1,4 +1,8 @@
+require_relative "bill"
+
 class Cart
+  attr_reader :order
+
   def initialize
     @order = Hash.new(0)
   end
@@ -13,10 +17,10 @@ class Cart
       take_input
     else
       user_input.each { |order| @order[order] += 1 }
-      
+
       puts "Order for the following has been confirmed. Thank you.\n\n"
 
-      view_order
+      return view_order
     end
   end
 
@@ -27,3 +31,5 @@ end
 
 cart_items = Cart.new
 cart_items.take_input
+bill = Bill.new(cart_items.order)
+bill.show_bill
